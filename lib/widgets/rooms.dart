@@ -26,7 +26,7 @@ class Rooms extends StatelessWidget {
           }
           final User user = onlineUsers[index - 1];
           return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
+            padding: const EdgeInsets.all(8),
             child: ProfileAvatar(
               imageUrl: user.imageUrl,
               isActive: true,
@@ -54,14 +54,19 @@ class _CreateRoomButton extends StatelessWidget {
       textColor: Palette.facebookBlue,
       child: Row(
         children: [
-          ShaderMask(
-            shaderCallback: (rect) =>
-                Palette.createRoomGradient.createShader(rect),
-            child: Icon(
-              Icons.video_call,
-              size: 35,
-              color: Colors.white,
-            ),
+          // ShaderMask(
+          //   shaderCallback: (rect) =>
+          //       Palette.createRoomGradient.createShader(rect),
+          //   child: Icon(
+          //     Icons.video_call,
+          //     size: 35,
+          //     color: Colors.white,
+          //   ),
+          // ),
+          Icon(
+            Icons.video_call,
+            size: 35,
+            color: Colors.purple,
           ),
           const SizedBox(
             width: 4,
