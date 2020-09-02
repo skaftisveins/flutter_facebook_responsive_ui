@@ -10,29 +10,37 @@ class Rooms extends StatelessWidget {
   const Rooms({Key key, this.onlineUsers}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 70,
-      color: Colors.white,
-      child: ListView.builder(
-        padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
-        scrollDirection: Axis.horizontal,
-        itemCount: 1 + onlineUsers.length,
-        itemBuilder: (context, index) {
-          if (index == 0) {
+    final bool isDesktop = Responsive.isDesktop(context);
+    return Card(
+      margin: EdgeInsets.symmetric(horizontal: isDesktop ? 5 : 0),
+      elevation: isDesktop ? 1 : 0,
+      shape: isDesktop
+          ? RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))
+          : null,
+      child: Container(
+        height: 70,
+        color: Colors.white,
+        child: ListView.builder(
+          padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+          scrollDirection: Axis.horizontal,
+          itemCount: 1 + onlineUsers.length,
+          itemBuilder: (context, index) {
+            if (index == 0) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: _CreateRoomButton(),
+              );
+            }
+            final User user = onlineUsers[index - 1];
             return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: _CreateRoomButton(),
+              padding: const EdgeInsets.all(8),
+              child: ProfileAvatar(
+                imageUrl: user.imageUrl,
+                isActive: true,
+              ),
             );
-          }
-          final User user = onlineUsers[index - 1];
-          return Padding(
-            padding: const EdgeInsets.all(8),
-            child: ProfileAvatar(
-              imageUrl: user.imageUrl,
-              isActive: true,
-            ),
-          );
-        },
+          },
+        ),
       ),
     );
   }
